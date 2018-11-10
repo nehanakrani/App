@@ -1,0 +1,4 @@
+1. role gem
+2. authorization pundit.
+3. event edit close on 1 day before event.
+4. event create only admin, attend only by users.

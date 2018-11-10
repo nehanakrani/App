@@ -1,0 +1,25 @@
+<% provide(:title, "All Events") %>
+<h1>All Events</h1>
+<div>
+<h4>Upcoming Events</h4>
+<% @upcoming_events.each do |event| %>
+<%= render 'event', :event => event %>
+<% end %> 
+</div>
+
+<div>
+<h4>Past Events</h4>
+<% @past_events.each do |event| %>
+<%= render 'event', :event => event %>
+<% end %> 
+</div>
+
+
+
+
+
+    
+
+
+
+

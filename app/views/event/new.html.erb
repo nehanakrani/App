@@ -1,0 +1,45 @@
+<% provide(:title, "Create Event") %>
+<div class="row">
+	<div class="col-sm-8 col-sm-offset-2">
+		<div class="well well-lg">
+		<% if current_user && current_user.has_role?(:admin) %>
+		<h2>Create a New Event</h2>
+		<%= form_for @event, url: {action: "create"}   do |f| %>
+			<%= f.label :title %>
+			<%= f.text_field :title, class: 'form-control' %>
+
+			<%= f.label :description %>
+			<%= f.text_area :description, class: 'form-control' %>
+
+			<%= f.label :location %>
+			<%= f.text_field :location, class: 'form-control' %>
+
+			<%= f.label :date %>
+			<%= f.date_field :date, class: 'form-control' %><br/>
+					
+			<%= f.fields_for :pictures do |pic| %>  
+			<%= pic.file_field :picture ,class: 'form-control' ,accept: 'image/jpeg,image/gif,image/png' %>	    				
+			<% end %> </br>
+
+			<%= f.submit "Create event",class: 'btn btn-primary center-block'%>
+			<% end %>
+			<% else %>
+				<h2> sorry you can not create event !!!!!!<h2>
+			<% end %>
+
+		<script type="text/javascript">
+	    $('#event_picture').bind('change', function() 
+	    {
+	    	var size_in_megabytes = this.files[0].size/1024/1024;
+	    	if (size_in_megabytes > 5)
+	    	{
+	    		alert('Maximum file size is 5MB. Please choose a smaller file.');
+	         }
+		});
+		</script>
+	    </div>
+	</div>
+</div>
+
+
+

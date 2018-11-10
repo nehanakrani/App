@@ -1,0 +1,26 @@
+<div class="well border-blue" style="background: whitesmoke;">
+	<p><b>Title : </b> <%=event.title %>  
+	(<b> Created By </b> <%= link_to event.creator.name, user_path(event.creator) %>)</p>
+
+	<span class="glyphicon glyphicon-calendar"></span>
+	<b> Date : </b> <%= event.date %>
+
+	<span class="glyphicon glyphicon-map-marker"></span>
+	<b>  Location : </b> <%= event.location %>
+
+	<b>Description:</b> <%= event.description %> </br>
+	<p><% event.pictures.each do |picture| %>
+		<%= image_tag picture.picture_url.to_s %>
+		<% end %></p>
+	
+	<div class="col-sm-1 " ><%= button_to "Attend", attend_event_path(event.id),class:"btn btn-primary btn-sm" %> 
+	</div>
+	<div class="col-sm-6 " >
+		<% if policy(event).destroy?%>
+		<% if (event.date > Time.now.utc + 24.hour) %>
+		<b>You want to delete this event ?:</b><%= link_to "delete", action:"destroy",controller:"event" ,method: :delete,data: { confirm: "You sure?" },class: 'btn btn-danger' %> 
+        <%end%>
+        <%end%>
+    </div>
+    </div>
+</div>

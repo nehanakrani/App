@@ -1,0 +1,65 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+<aside class="col-md-4">
+<section class="user_info">
+  <% @user.pictures.each do |pic| %>
+  <%= image_tag pic.picture_url.to_s %>
+  <% end %>
+  <p><b>Name : </b><%= @user.name%><br/></p>
+  <p><b>Email : </b> <%= @user.email %><br/></p>
+  <p><b>Phone_number : </b> <%= @user.phone_number %><br/></p>
+  <p><b>Brithdate :  </b> <%= @user.date_of_birth %><br/></p>
+  <% if @user.attended_events.any? %>
+    <h3><b> User Attending Events :: </b> 
+    <%= @user.attended_events.count %> </h3>        
+  <%end%>
+</section>
+</aside> 
+</div>
+
+<h4>yours all Events</h4>
+  <% if @user.events.any? %>
+  <% @user.events.each do |event| %>
+  <div class="well">
+    <p><b>Title : </b> <%=event.title %>  
+    (<b> Created By </b> <%= link_to event.creator.name, user_path(event.creator) %>)</p>
+
+    <span class="glyphicon glyphicon-calendar"></span>
+    <b> Date : </b> <%= event.date %>
+
+    <span class="glyphicon glyphicon-map-marker"></span>
+    <b>  Location : </b> <%= event.location %>
+
+    <b>Description:</b> <%= event.description %>
+    <p><b>picture:</b> </br><% event.pictures.each do |picture| %>
+      <%= image_tag picture.picture_url.to_s %>
+    <% end %></p>
+  </div>
+  <% end %>   
+  <%else%>
+    <div class="well border-blue" style="background: whitesmoke;">
+      <h4>you have not create any event ....!plase go to event attending</h4>
+    </div>
+  <% end %>
+
+  <div class="well well" >
+  <h2> <u><%= @user.name %>  will be attending events:</u></h2>
+  <% if @user.upcoming_events.empty? %>
+    <h4><i>Hey <%= @user.name %>... go for Upcoming event to Attend :</i></h4>
+  <% else %>
+    <% @user.upcoming_events.each do |event| %>
+    <p><u><%=event.title%></u></p>
+    <% end %>
+    <% end %>
+  </div>
+
+  <div class="well well" >
+    <h2><%= @user.name %>previously attended events:</h2>
+    <% if @user.past_events.empty? %>
+    <h4>you are not attendeed any event in past go for upcoming event</h4>
+    <% else %>
+    <% @user.past_events.each do |event| %>
+      <p><u><%= event.title%></u></p>
+    <% end %>
+    <% end %>
+  </div>
