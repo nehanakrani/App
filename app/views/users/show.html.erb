@@ -17,7 +17,7 @@
 </aside> 
 </div>
 
-<h4>yours all Events</h4>
+<h4>Yours Events</h4>
   <% if @user.events.any? %>
   <% @user.events.each do |event| %>
   <div class="well">
@@ -38,14 +38,14 @@
   <% end %>   
   <%else%>
     <div class="well border-blue" style="background: whitesmoke;">
-      <h4>you have not create any event ....!plase go to event attending</h4>
+      <h4>You Have Not Created Any Event.!</h4>
     </div>
   <% end %>
 
   <div class="well well" >
   <h2> <u><%= @user.name %>  will be attending events:</u></h2>
   <% if @user.upcoming_events.empty? %>
-    <h4><i>Hey <%= @user.name %>... go for Upcoming event to Attend :</i></h4>
+    <h4>you are not attendeed any upcoming event.</h4>
   <% else %>
     <% @user.upcoming_events.each do |event| %>
     <p><u><%=event.title%></u></p>
@@ -54,9 +54,9 @@
   </div>
 
   <div class="well well" >
-    <h2><%= @user.name %>previously attended events:</h2>
+    <h2><%= @user.name %> previously attended events: </h2>
     <% if @user.past_events.empty? %>
-    <h4>you are not attendeed any event in past go for upcoming event</h4>
+    <h4>you are not attendeed any event in past.</h4>
     <% else %>
     <% @user.past_events.each do |event| %>
       <p><u><%= event.title%></u></p>

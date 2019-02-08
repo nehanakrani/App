@@ -10,6 +10,28 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+
+Firstly, rename your file to welcome.scss.erb.
+Then make sure to include your welcome.scss.erb into application.css.erb.
+Simply add the line:
+
  *= require_tree .
  *= require_self
  */
+ body.background {
+    background-image: url("em.jpg");
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+ }
+
+.text-home{
+    color: bisque;
+    font-size: 20px
+}
+.navbar-inverse {
+    background-color: #d25337;
+    border-color: #090909;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #fffbfb;
+}

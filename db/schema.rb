@@ -10,14 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_30_072501) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 2018_07_13_041847) do
 
   create_table "event_attendees", force: :cascade do |t|
-    t.string "event_id"
-    t.string "attendee_id"
+    t.integer "attended_event_id"
+    t.integer "event_attendee_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -39,22 +36,22 @@ ActiveRecord::Schema.define(version: 2018_07_30_072501) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "items", force: :cascade do |t|
-    t.string "name"
-    t.boolean "done"
-    t.bigint "todo_id"
+  create_table "invites", force: :cascade do |t|
+    t.integer "Invite"
+    t.integer "attended_event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["todo_id"], name: "index_items_on_todo_id"
   end
 
   create_table "pictures", force: :cascade do |t|
     t.string "name"
-    t.integer "imageable_id"
     t.string "imageable_type"
+    t.integer "imageable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "picture"
+    t.index ["imageable_id", "imageable_type"], name: "index_pictures_on_imageable_id_and_imageable_type"
+    t.index ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable_type_and_imageable_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -66,13 +63,6 @@ ActiveRecord::Schema.define(version: 2018_07_30_072501) do
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
-  end
-
-  create_table "todos", force: :cascade do |t|
-    t.string "title"
-    t.string "created_by"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -92,8 +82,6 @@ ActiveRecord::Schema.define(version: 2018_07_30_072501) do
     t.datetime "date_of_birth"
     t.boolean "is_female", default: false
     t.string "phone_number"
-    t.integer "role"
-    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -106,5 +94,4 @@ ActiveRecord::Schema.define(version: 2018_07_30_072501) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  add_foreign_key "items", "todos"
 end

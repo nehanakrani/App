@@ -9,7 +9,7 @@
 
     <%= render 'layouts/shim' %>
   </head>
-  <body>
+  <body >
     <%= render 'layouts/header' %>
     <div class="container main-content">
       <% flash.each do |message_type, message| %>
@@ -21,8 +21,7 @@
         <% end %>
       <% end %>
       <%= yield %>
-      <%= render 'layouts/footer' %>
-       
+     
     </div>
     </body>
   </html>
