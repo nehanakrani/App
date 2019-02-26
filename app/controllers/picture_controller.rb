@@ -1,5 +1,6 @@
 class PictureController < ApplicationController
 before_action :load_imagable
+
 #picture craete for event and user profile picture
 def create
 	@picture =@imageable.pictures.new(picture_params)  
@@ -9,16 +10,19 @@ def create
 		render :new
 	end
 	end 
+
 #render picture from
 	def new
 		@picture  = @imageable.pictures.new
 	end
+
 #show picture
 	def show
 		@picture = Picture.find(params[:id])
 	    @imageable = User.find(params[:user_id])
 	    @imageable = Event.find(params[:event_id])
 	end
+	
 #private method for picture params and load images
 	private
 	def picture_params
